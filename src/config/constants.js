@@ -1,5 +1,5 @@
 // Central Instagram URL
-export const INSTAGRAM_URL = "https://instagram.com/terran.accessories";
+export const INSTAGRAM_URL = "https://www.instagram.com/terran.ps/";
 
 // Navigation links
 export const NAV_LINKS = [
