@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   AppBar,
   Toolbar,
@@ -13,10 +14,10 @@ import {
   ListItem,
   ListItemText,
   Typography,
-  Stack,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import { NAV_LINKS, INSTAGRAM_URL } from '@/config/constants';
 
 export default function Navbar() {
@@ -24,31 +25,18 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const handleDrawerToggle = () => setMobileOpen((prev) => !prev);
 
   const handleNavClick = (e, href) => {
-    if (href && href.startsWith('#')) {
+    if (href?.startsWith('#')) {
       e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
       setMobileOpen(false);
     } else if (href) {
       window.open(href, '_blank', 'noopener,noreferrer');
@@ -62,41 +50,48 @@ export default function Navbar() {
         position="fixed"
         elevation={0}
         sx={{
-          backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(10px)' : 'none',
-          transition: 'all 0.3s ease-in-out',
-          height: '70px',
+          backgroundColor: isScrolled
+            ? 'rgba(250, 249, 247, 0.98)'
+            : '#FAF9F7',
+          backdropFilter: 'blur(10px)',
+          borderBottom: '1px solid #EAE7E1',
+          transition: 'all 0.3s ease',
+          height: '76px',
           justifyContent: 'center',
           zIndex: 1100,
         }}
       >
-        <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: '70px' }}>
-            {/* Logo */}
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                color: '#C9A84C',
-                letterSpacing: '6px',
-                fontFamily: 'serif',
-                fontSize: '24px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              TERRAN
-            </Typography>
+        <Container maxWidth="lg">
+          <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: '76px' }}>
 
-            {/* Desktop Nav Links */}
+            {/* Right in RTL: Terran Calligraphy Logo */}
             <Box
+              sx={{
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                order: { xs: 1, md: 1 },
+              }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="تيران Terran"
+                width={100}
+                height={50}
+                priority
+                style={{ objectFit: 'contain', width: 'auto', height: '42px' }}
+              />
+            </Box>
+
+            {/* Center in RTL: Desktop Nav Links */}
+            <Box
+              component="nav"
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 alignItems: 'center',
-                gap: 4,
+                gap: 4.5,
+                order: { xs: 2, md: 2 },
               }}
             >
               {NAV_LINKS?.map((link) => (
@@ -106,15 +101,29 @@ export default function Navbar() {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   sx={{
-                    color: '#fff',
+                    color: '#333333',
                     textDecoration: 'none',
-                    fontSize: '0.9rem',
+                    fontSize: '0.88rem',
                     fontWeight: 500,
                     cursor: 'pointer',
-                    transition: 'color 0.3s',
+                    position: 'relative',
                     fontFamily: 'Cairo, sans-serif',
+                    transition: 'color 0.2s ease',
                     '&:hover': {
-                      color: '#C9A84C',
+                      color: '#000000',
+                    },
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: -4,
+                      right: '20%',
+                      width: 0,
+                      height: '1.5px',
+                      backgroundColor: '#1A1A1A',
+                      transition: 'width 0.25s ease',
+                    },
+                    '&:hover::after': {
+                      width: '60%',
                     },
                   }}
                 >
@@ -123,37 +132,44 @@ export default function Navbar() {
               ))}
             </Box>
 
-            {/* Desktop CTA */}
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            {/* Left in RTL: CTA Button */}
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', order: { xs: 3, md: 3 } }}>
               <Button
-                variant="contained"
-                onClick={() => window.open(INSTAGRAM_URL, '_blank', 'noopener,noreferrer')}
+                variant="outlined"
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                startIcon={<InstagramIcon sx={{ fontSize: '18px !important', ml: 0.5, mr: -0.5 }} />}
                 sx={{
-                  backgroundColor: '#C9A84C',
-                  color: '#111',
-                  fontWeight: 'bold',
-                  borderRadius: '0',
-                  px: 3,
-                  py: 1,
+                  borderColor: '#1A1A1A',
+                  color: '#1A1A1A',
+                  backgroundColor: 'transparent',
+                  fontWeight: 600,
+                  borderRadius: '2px',
+                  px: 2.2,
+                  py: 0.8,
+                  fontSize: '0.82rem',
                   fontFamily: 'Cairo, sans-serif',
                   '&:hover': {
-                    backgroundColor: '#e6c86a',
+                    backgroundColor: '#1A1A1A',
+                    color: '#FAF9F7',
+                    borderColor: '#1A1A1A',
                   },
                 }}
               >
-                اطلب الآن
+                اطلب عبر إنستقرام
               </Button>
             </Box>
 
-            {/* Mobile Hamburger Menu */}
+            {/* Mobile Hamburger */}
             <IconButton
               aria-label="open drawer"
-              edge="start"
               onClick={handleDrawerToggle}
-              sx={{ display: { xs: 'flex', md: 'none' }, color: '#C9A84C' }}
+              sx={{ display: { xs: 'flex', md: 'none' }, color: '#1A1A1A', order: { xs: 2 } }}
             >
               <MenuIcon />
             </IconButton>
+
           </Toolbar>
         </Container>
       </AppBar>
@@ -166,64 +182,77 @@ export default function Navbar() {
         slotProps={{
           paper: {
             sx: {
-              backgroundColor: '#111111',
-              color: '#fff',
-              width: 250,
-              padding: 2,
+              backgroundColor: '#FAF9F7',
+              color: '#1A1A1A',
+              width: 270,
+              padding: 2.5,
+              borderLeft: '1px solid #E8E5E0',
             },
           },
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
-          <IconButton onClick={handleDrawerToggle} sx={{ color: '#fff' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Image
+            src="/images/logo.png"
+            alt="تيران Terran"
+            width={85}
+            height={42}
+            style={{ objectFit: 'contain', width: 'auto', height: '36px' }}
+          />
+          <IconButton onClick={handleDrawerToggle} sx={{ color: '#1A1A1A' }}>
             <CloseIcon />
           </IconButton>
         </Box>
+
+        <Box sx={{ height: '1px', backgroundColor: '#E8E5E0', mb: 2 }} />
+
         <List>
           {NAV_LINKS?.map((link) => (
-            <ListItem 
-              key={link.label} 
+            <ListItem
+              key={link.label}
               onClick={(e) => handleNavClick(e, link.href)}
-              sx={{ 
-                textAlign: 'right', 
+              sx={{
+                textAlign: 'right',
                 cursor: 'pointer',
-                '&:hover .MuiListItemText-primary': {
-                  color: '#C9A84C',
-                }
+                borderRadius: '4px',
+                py: 1,
+                '&:hover': { backgroundColor: '#F0ECE4' },
               }}
             >
-              <ListItemText 
-                primary={link.label} 
+              <ListItemText
+                primary={link.label}
                 slotProps={{
                   primary: {
                     sx: {
                       fontFamily: 'Cairo, sans-serif',
                       fontWeight: 500,
-                      transition: 'color 0.3s',
+                      fontSize: '0.95rem',
+                      color: '#1A1A1A',
                     },
                   },
                 }}
               />
             </ListItem>
           ))}
-          <ListItem sx={{ mt: 2 }}>
+          <ListItem sx={{ mt: 3, px: 0 }}>
             <Button
               fullWidth
               variant="contained"
-              onClick={() => window.open(INSTAGRAM_URL, '_blank', 'noopener,noreferrer')}
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={<InstagramIcon sx={{ ml: 0.5, mr: -0.5 }} />}
               sx={{
-                backgroundColor: '#C9A84C',
-                color: '#111',
-                fontWeight: 'bold',
-                borderRadius: '0',
-                py: 1.5,
+                backgroundColor: '#1A1A1A',
+                color: '#FAF9F7',
+                fontWeight: 600,
+                borderRadius: '2px',
+                py: 1.2,
                 fontFamily: 'Cairo, sans-serif',
-                '&:hover': {
-                  backgroundColor: '#e6c86a',
-                },
+                '&:hover': { backgroundColor: '#333333' },
               }}
             >
-              اطلب الآن
+              اطلب عبر إنستقرام
             </Button>
           </ListItem>
         </List>

@@ -1,6 +1,9 @@
 "use client";
 
 import { Box, Container, Typography, Button } from "@mui/material";
+import Image from "next/image";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import { INSTAGRAM_URL } from "@/config/constants";
 
 export default function FinalCTA() {
@@ -8,57 +11,51 @@ export default function FinalCTA() {
     <Box
       component="section"
       sx={{
-        py: { xs: 8, md: 10 },
-        backgroundColor: "#111111",
+        py: { xs: 9, md: 12 },
+        backgroundColor: "#FAF9F7",
+        borderTop: "1px solid #EAE7E1",
         position: "relative",
-        overflow: "hidden",
       }}
     >
-      {/* Top gold accent line */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 120,
-          height: 2,
-          background: "linear-gradient(90deg, transparent, #C9A84C, transparent)",
-        }}
-      />
-
       <Container maxWidth="md">
         <Box
           sx={{
             textAlign: "center",
-            py: { xs: 4, md: 6 },
-            px: { xs: 2, md: 4 },
-            borderRadius: "20px",
-            backgroundColor: "rgba(26, 26, 26, 0.5)",
-            border: "1px solid #2A2A2A",
+            py: { xs: 6, md: 8 },
+            px: { xs: 3, sm: 6, md: 8 },
+            borderRadius: "2px",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #EAE7E1",
+            boxShadow: "0 6px 30px rgba(0,0,0,0.03)",
             position: "relative",
-            "&::before": {
-              content: '""',
-              position: "absolute",
-              inset: -1,
-              borderRadius: "20px",
-              padding: 1,
-              background: "linear-gradient(135deg, #C9A84C20, transparent 50%, #C9A84C20)",
-              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              maskComposite: "xor",
-              WebkitMaskComposite: "xor",
-              pointerEvents: "none",
-            },
           }}
         >
+          {/* Logo watermark */}
+          <Box
+            sx={{
+              mb: 3,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src="/images/logo.png"
+              alt="تيران Terran"
+              width={100}
+              height={50}
+              style={{ objectFit: "contain", width: "auto", height: "44px" }}
+            />
+          </Box>
+
           <Typography
             variant="h2"
             sx={{
               fontWeight: 700,
-              color: "#F5F5F0",
+              color: "#1A1A1A",
               mb: 2,
-              fontSize: { xs: "1.6rem", sm: "2rem", md: "2.3rem" },
-              lineHeight: 1.4,
+              fontSize: { xs: "1.75rem", sm: "2.1rem", md: "2.4rem" },
+              letterSpacing: "-0.01em",
+              lineHeight: 1.35,
             }}
           >
             جاهز تضيف لمسة مختلفة لإطلالتك؟
@@ -66,27 +63,16 @@ export default function FinalCTA() {
 
           <Typography
             sx={{
-              color: "#999",
-              fontSize: { xs: "0.9rem", md: "1rem" },
-              mb: 4,
+              color: "#666666",
+              fontSize: { xs: "0.94rem", md: "1.02rem" },
+              mb: 4.5,
               maxWidth: 500,
               mx: "auto",
-              lineHeight: 1.7,
+              lineHeight: 1.8,
             }}
           >
-            اختر البكج المناسب إلك وخلّي التفاصيل تحكي عنك.
+            اختر البكج المناسب لك ودع التفاصيل تعمل بشكل متناسق لترسم التميز الذي تبحث عنه، بكل أناقة.
           </Typography>
-
-          {/* Gold decorative line */}
-          <Box
-            sx={{
-              width: 60,
-              height: 2,
-              backgroundColor: "#C9A84C",
-              mx: "auto",
-              mb: 4,
-            }}
-          />
 
           <Button
             variant="contained"
@@ -94,24 +80,65 @@ export default function FinalCTA() {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
+            startIcon={<InstagramIcon sx={{ ml: 0.5, mr: -0.5 }} />}
             sx={{
-              backgroundColor: "#C9A84C",
-              color: "#0A0A0A",
-              px: { xs: 4, md: 6 },
-              py: 1.5,
-              fontSize: { xs: "0.95rem", md: "1.05rem" },
+              backgroundColor: "#1A1A1A",
+              color: "#FAF9F7",
+              px: { xs: 4, sm: 6 },
+              py: 1.6,
+              fontSize: { xs: "0.92rem", md: "1rem" },
               fontWeight: 700,
-              borderRadius: "8px",
-              transition: "all 0.3s ease",
+              borderRadius: "2px",
+              boxShadow: "none",
+              transition: "all 0.25s ease",
               "&:hover": {
-                backgroundColor: "#D4B85A",
-                transform: "translateY(-2px)",
-                boxShadow: "0 8px 30px rgba(201, 168, 76, 0.3)",
+                backgroundColor: "#000000",
+                transform: "translateY(-1px)",
+                boxShadow: "0 6px 20px rgba(0,0,0,0.14)",
               },
             }}
           >
-            اطلب بكجك الآن
+            اطلب عبر إنستقرام
           </Button>
+
+          {/* Trust Checkmarks row */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: { xs: 2, sm: 4, md: 5 },
+              mt: 5,
+              pt: 4,
+              borderTop: "1px solid #EAE7E1",
+              flexWrap: "wrap",
+            }}
+          >
+            {[
+              "توصيل سريع لكافة المناطق",
+              "دفع آمن عند الاستلام",
+              "معاينة قبل الاستلام",
+            ].map((item, i) => (
+              <Box
+                key={i}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.8,
+                }}
+              >
+                <CheckCircleOutlinedIcon sx={{ fontSize: 16, color: "#1A1A1A" }} />
+                <Typography
+                  sx={{
+                    fontSize: "0.82rem",
+                    color: "#555555",
+                    fontWeight: 600,
+                  }}
+                >
+                  {item}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Container>
     </Box>

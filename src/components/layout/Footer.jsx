@@ -1,142 +1,194 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import {
   Box,
   Container,
   Typography,
-  Stack,
-  IconButton,
-  Divider,
+  Button,
 } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { INSTAGRAM_URL, NAV_LINKS } from '@/config/constants';
 
 export default function Footer() {
+  const handleNavClick = (e, href) => {
+    if (href?.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    } else if (href) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <Box
       component="footer"
       sx={{
-        backgroundColor: '#0A0A0A',
-        borderTop: '1px solid #2A2A2A',
-        py: 6,
+        backgroundColor: '#FFFFFF',
+        borderTop: '1px solid #EAE7E1',
+        pt: { xs: 6, md: 7 },
+        pb: 4,
         width: '100%',
       }}
     >
       <Container maxWidth="lg">
-        <Stack
-          spacing={3.5}
-          sx={{ alignItems: 'center', textAlign: 'center' }}
+        {/* Top Row */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: { xs: 3.5, md: 2 },
+            pb: 5,
+          }}
         >
-          {/* Brand & Tagline */}
-          <Stack spacing={1} sx={{ alignItems: 'center' }}>
-            <Typography
-              variant="h4"
-              component="div"
-              sx={{
-                fontWeight: 700,
-                color: '#C9A84C',
-                letterSpacing: '6px',
-                fontFamily: 'serif',
-                fontSize: { xs: '1.75rem', md: '2rem' },
-                userSelect: 'none',
-              }}
-            >
-              TERRAN
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: '#999999',
-                fontSize: { xs: '0.875rem', md: '0.95rem' },
-              }}
-            >
-              إكسسوارات رجالية | أناقة تتجاوز الأساسيات
-            </Typography>
-          </Stack>
-
-          {/* Navigation Links */}
+          {/* Right in RTL: Brand & Subtitle */}
           <Box
-            component="nav"
-            aria-label="روابط تذييل الصفحة"
             sx={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
+              flexDirection: 'column',
+              alignItems: { xs: 'center', md: 'flex-start' },
+              textAlign: { xs: 'center', md: 'right' },
+            }}
+          >
+            <Box
+              sx={{ cursor: 'pointer', mb: 1 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="تيران Terran"
+                width={100}
+                height={50}
+                style={{ objectFit: 'contain', width: 'auto', height: '40px' }}
+              />
+            </Box>
+            <Typography
+              sx={{
+                color: '#777777',
+                fontSize: '0.82rem',
+              }}
+            >
+              إكسسوارات رجالية تعبّر عن التفاصيل.
+            </Typography>
+          </Box>
+
+          {/* Center in RTL: Navigation Links */}
+          <Box
+            component="nav"
+            sx={{
+              display: 'flex',
               alignItems: 'center',
+              gap: { xs: 3, md: 4.5 },
               flexWrap: 'wrap',
-              gap: { xs: 2.5, sm: 4 },
-              rowGap: 1.5,
+              justifyContent: 'center',
             }}
           >
             {NAV_LINKS.map((link) => (
-              <Box
+              <Typography
                 key={link.label}
                 component="a"
                 href={link.href}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
+                onClick={(e) => handleNavClick(e, link.href)}
                 sx={{
-                  color: '#999999',
+                  color: '#444444',
                   textDecoration: 'none',
-                  fontSize: { xs: '0.875rem', md: '0.95rem' },
+                  fontSize: '0.86rem',
                   fontWeight: 500,
-                  transition: 'color 0.3s ease',
+                  transition: 'color 0.2s ease',
+                  cursor: 'pointer',
                   '&:hover': {
-                    color: '#C9A84C',
+                    color: '#000000',
                   },
                 }}
               >
                 {link.label}
-              </Box>
+              </Typography>
             ))}
           </Box>
 
-          {/* Social Links */}
+          {/* Left in RTL: Instagram Button */}
           <Box>
-            <IconButton
-              component="a"
+            <Button
+              variant="outlined"
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram"
+              startIcon={<InstagramIcon sx={{ ml: 0.5, mr: -0.5, fontSize: '18px !important' }} />}
               sx={{
-                color: '#999999',
-                border: '1px solid #2A2A2A',
-                p: 1.25,
-                transition: 'all 0.3s ease',
+                borderColor: '#1A1A1A',
+                color: '#1A1A1A',
+                backgroundColor: 'transparent',
+                fontWeight: 600,
+                borderRadius: '2px',
+                px: 2.4,
+                py: 0.8,
+                fontSize: '0.82rem',
+                fontFamily: 'Cairo, sans-serif',
                 '&:hover': {
-                  color: '#C9A84C',
-                  borderColor: '#C9A84C',
-                  backgroundColor: 'rgba(201, 168, 76, 0.08)',
-                  transform: 'translateY(-2px)',
+                  backgroundColor: '#1A1A1A',
+                  color: '#FAF9F7',
+                  borderColor: '#1A1A1A',
                 },
               }}
             >
-              <InstagramIcon sx={{ fontSize: '1.4rem' }} />
-            </IconButton>
+              اطلب عبر إنستقرام
+            </Button>
           </Box>
+        </Box>
 
-          {/* Divider */}
-          <Divider
-            sx={{
-              width: '100%',
-              maxWidth: 600,
-              borderColor: '#2A2A2A',
-            }}
-          />
+        {/* Divider */}
+        <Box sx={{ height: '1px', backgroundColor: '#EAE7E1', width: '100%', mb: 3 }} />
 
-          {/* Copyright Notice */}
+        {/* Bottom Row */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 2,
+            textAlign: { xs: 'center', sm: 'start' },
+          }}
+        >
+          {/* Copyright Right in RTL */}
           <Typography
-            variant="caption"
             sx={{
-              color: '#999999',
-              fontSize: '0.825rem',
+              color: '#888888',
+              fontSize: '0.78rem',
             }}
           >
-            © 2026 TERRAN. جميع الحقوق محفوظة.
+            TERRAN 2024 © جميع الحقوق محفوظة
           </Typography>
-        </Stack>
+
+          {/* Legal Links Left in RTL */}
+          <Box sx={{ display: 'flex', gap: 3 }}>
+            <Typography
+              component="span"
+              sx={{
+                color: '#888888',
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                '&:hover': { color: '#1A1A1A' },
+              }}
+            >
+              شروط وأحكام
+            </Typography>
+            <Typography
+              component="span"
+              sx={{
+                color: '#888888',
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                '&:hover': { color: '#1A1A1A' },
+              }}
+            >
+              سياسة الخصوصية
+            </Typography>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );

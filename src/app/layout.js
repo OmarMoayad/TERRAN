@@ -34,7 +34,7 @@ export const metadata = {
       : undefined,
   },
   icons: {
-    icon: "/images/logo.svg",
+    icon: "/images/logo.png",
   },
 };
 

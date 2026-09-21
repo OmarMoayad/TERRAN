@@ -8,8 +8,9 @@ export default function BrandVisual() {
     <Box
       component="section"
       sx={{
-        py: { xs: 8, md: 12 },
-        backgroundColor: "#0A0A0A",
+        py: { xs: 9, md: 12 },
+        backgroundColor: "#FAF9F7",
+        borderTop: "1px solid #EAE7E1",
         position: "relative",
         overflow: "hidden",
       }}
@@ -17,101 +18,125 @@ export default function BrandVisual() {
       <Container maxWidth="lg">
         <Box
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1.1fr 1fr" },
+            gap: { xs: 5, md: 8 },
             alignItems: "center",
-            gap: { xs: 4, md: 6 },
-            minHeight: { md: 450 },
           }}
         >
-          {/* Image Side */}
+          {/* Right Column in RTL: Content */}
           <Box
             sx={{
-              flex: 1,
-              position: "relative",
-              width: "100%",
-              height: { xs: 300, md: 450 },
-              borderRadius: "16px",
-              overflow: "hidden",
-              "&::after": {
-                content: '""',
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(to left, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.1) 50%, transparent 100%)",
-                zIndex: 1,
-              },
-            }}
-          >
-            <Image
-              src="/images/hero.png"
-              alt="إكسسوارات رجالية فاخرة"
-              width={1200}
-              height={1200}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </Box>
-
-          {/* Text Side */}
-          <Box
-            sx={{
-              flex: 1,
+              order: { xs: 2, md: 1 },
               textAlign: { xs: "center", md: "right" },
-              px: { xs: 2, md: 0 },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: { xs: "center", md: "flex-start" },
             }}
           >
-            {/* Gold accent line */}
+            {/* Tagline */}
             <Box
               sx={{
-                width: 60,
-                height: 2,
-                backgroundColor: "#C9A84C",
-                mb: 3,
-                mx: { xs: "auto", md: 0 },
+                display: "flex",
+                alignItems: "center",
+                gap: 1.5,
+                mb: 2.5,
+                justifyContent: { xs: "center", md: "flex-start" },
               }}
-            />
+            >
+              <Box sx={{ width: 26, height: "1px", backgroundColor: "#C8C4BE" }} />
+              <Typography
+                sx={{
+                  color: "#777777",
+                  fontSize: "0.72rem",
+                  fontWeight: 600,
+                  letterSpacing: "3px",
+                  textTransform: "uppercase",
+                }}
+              >
+                TERRAN STANDARD
+              </Typography>
+              <Box sx={{ width: 26, height: "1px", backgroundColor: "#C8C4BE" }} />
+            </Box>
 
+            {/* Heading */}
             <Typography
               variant="h2"
               sx={{
                 fontWeight: 700,
-                color: "#F5F5F0",
+                color: "#1A1A1A",
                 mb: 3,
-                fontSize: { xs: "1.8rem", md: "2.2rem" },
-                lineHeight: 1.4,
+                fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.5rem" },
+                lineHeight: 1.38,
+                letterSpacing: "-0.01em",
               }}
             >
-              لأن الأناقة الحقيقية لا تصرخ،
-              <br />
-              بل تلفت الانتباه بهدوء
+              لأن الأناقة الحقيقية لا تصرخ، بل تلفت الإنتباه بهدوء
             </Typography>
 
+            {/* Body */}
             <Typography
               sx={{
-                color: "#999",
-                fontSize: { xs: "0.95rem", md: "1rem" },
-                lineHeight: 1.8,
-                maxWidth: 500,
-                mx: { xs: "auto", md: 0 },
+                color: "#666666",
+                fontSize: { xs: "0.95rem", md: "1.02rem" },
+                lineHeight: 1.88,
+                maxWidth: 490,
+                mb: 5,
               }}
             >
-              التفاصيل الصغيرة هي التي تصنع الفرق بين إطلالة عادية وإطلالة
-              استثنائية. في TERRAN، نختار لك كل قطعة بعناية لتكمل أسلوبك الخاص.
+              كل قطعة من بكجات تيران تم اختيارها لتمنحك الثقة الكاملة في كل لقاء، اجتماع، ومناسبة خاصة. إنها ليست مجرد إكسسوارات، بل تعكس هدوءك وأناقتك المتجددة.
             </Typography>
 
-            {/* Decorative gold corner */}
+            {/* Bottom Signature / Stamp */}
             <Box
               sx={{
-                display: { xs: "none", md: "block" },
-                position: "relative",
-                mt: 4,
-                width: 80,
-                height: 80,
-                borderRight: "2px solid #C9A84C",
-                borderBottom: "2px solid #C9A84C",
-                opacity: 0.3,
+                display: "flex",
+                alignItems: "center",
+                gap: 3,
+                pt: 2.5,
+                borderTop: "1px solid #EAE7E1",
+                width: "100%",
+                justifyContent: { xs: "center", md: "flex-start" },
               }}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="تيران Terran"
+                width={75}
+                height={38}
+                style={{ objectFit: "contain", width: "auto", height: "32px", opacity: 0.85 }}
+              />
+              <Box sx={{ textAlign: "right" }}>
+                <Typography sx={{ fontSize: "0.82rem", fontWeight: 700, color: "#1A1A1A", lineHeight: 1.2 }}>
+                  مجموعة 2024 الحصرية
+                </Typography>
+                <Typography sx={{ fontSize: "0.72rem", color: "#888888", mt: 0.3 }}>
+                  الأناقة تبدأ من التفاصيل
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+
+          {/* Left Column in RTL: Image */}
+          <Box
+            sx={{
+              order: { xs: 1, md: 2 },
+              position: "relative",
+              width: "100%",
+              height: { xs: 320, sm: 420, md: 470 },
+              borderRadius: "2px",
+              overflow: "hidden",
+              border: "1px solid #EAE7E1",
+              boxShadow: "0 6px 24px rgba(0,0,0,0.04)",
+              backgroundColor: "#F5F3EF",
+            }}
+          >
+            <Image
+              src="/images/luxury-box.png"
+              alt="صندوق تيران الفاخر للإكسسوارات الرجالية"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </Box>
         </Box>

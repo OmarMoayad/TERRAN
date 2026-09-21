@@ -1,53 +1,48 @@
 import { createTheme } from "@mui/material/styles";
 
-const GOLD = "#C9A84C";
-const GOLD_LIGHT = "#D4B85A";
-const GOLD_DARK = "#B8963E";
-const BLACK = "#0A0A0A";
-const BLACK_LIGHT = "#111111";
-const CHARCOAL = "#1A1A1A";
-const CHARCOAL_LIGHT = "#222222";
-const WHITE = "#F5F5F0";
-const GRAY = "#999999";
-const GRAY_LIGHT = "#AAAAAA";
-const DIVIDER = "#2A2A2A";
+const BLACK      = "#1A1A1A";
+const BLACK_MID  = "#2E2E2E";
+const GRAY_DARK  = "#555555";
+const GRAY       = "#888888";
+const GRAY_LIGHT = "#C8C4BE";
+const CREAM      = "#FAF9F7";
+const CREAM_MID  = "#F2F0EC";
+const WHITE      = "#FFFFFF";
+const DIVIDER    = "#E8E5E0";
 
 const theme = createTheme({
   direction: "rtl",
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
-      main: GOLD,
-      light: GOLD_LIGHT,
-      dark: GOLD_DARK,
-      contrastText: BLACK,
+      main: BLACK,
+      light: BLACK_MID,
+      dark: "#000000",
+      contrastText: CREAM,
     },
     secondary: {
-      main: WHITE,
-      contrastText: BLACK,
+      main: GRAY_DARK,
+      contrastText: WHITE,
     },
     background: {
-      default: BLACK,
-      paper: CHARCOAL,
+      default: CREAM,
+      paper: WHITE,
     },
     text: {
-      primary: WHITE,
-      secondary: GRAY,
+      primary: BLACK,
+      secondary: GRAY_DARK,
     },
     divider: DIVIDER,
-    gold: {
-      main: GOLD,
-      light: GOLD_LIGHT,
-      dark: GOLD_DARK,
-    },
     custom: {
       black: BLACK,
-      blackLight: BLACK_LIGHT,
-      charcoal: CHARCOAL,
-      charcoalLight: CHARCOAL_LIGHT,
-      white: WHITE,
+      blackMid: BLACK_MID,
+      grayDark: GRAY_DARK,
       gray: GRAY,
       grayLight: GRAY_LIGHT,
+      cream: CREAM,
+      creamMid: CREAM_MID,
+      white: WHITE,
+      divider: DIVIDER,
     },
   },
   typography: {
@@ -101,47 +96,41 @@ const theme = createTheme({
     },
     button: {
       fontWeight: 600,
-      fontSize: "0.95rem",
+      fontSize: "0.9rem",
       textTransform: "none",
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 4,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 2,
           padding: "10px 28px",
           fontWeight: 600,
-          fontSize: "0.95rem",
-          transition: "all 0.3s ease",
+          fontSize: "0.9rem",
+          transition: "all 0.25s ease",
+          boxShadow: "none",
+          "&:hover": {
+            boxShadow: "none",
+          },
         },
         containedPrimary: {
-          backgroundColor: GOLD,
-          color: BLACK,
+          backgroundColor: BLACK,
+          color: CREAM,
           "&:hover": {
-            backgroundColor: GOLD_LIGHT,
+            backgroundColor: BLACK_MID,
             transform: "translateY(-1px)",
-            boxShadow: `0 4px 20px ${GOLD}40`,
           },
         },
         outlinedPrimary: {
-          borderColor: GOLD,
-          color: GOLD,
+          borderColor: BLACK,
+          color: BLACK,
           "&:hover": {
-            borderColor: GOLD_LIGHT,
-            backgroundColor: `${GOLD}10`,
-          },
-        },
-        outlinedSecondary: {
-          borderColor: WHITE,
-          color: WHITE,
-          "&:hover": {
-            borderColor: GOLD,
-            color: GOLD,
-            backgroundColor: "transparent",
+            backgroundColor: `${BLACK}08`,
+            borderColor: BLACK,
           },
         },
       },
@@ -149,9 +138,10 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: CHARCOAL,
+          backgroundColor: WHITE,
           border: `1px solid ${DIVIDER}`,
-          borderRadius: 12,
+          borderRadius: 4,
+          boxShadow: "none",
           transition: "all 0.3s ease",
         },
       },
@@ -166,8 +156,8 @@ const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: BLACK_LIGHT,
-          color: WHITE,
+          backgroundColor: WHITE,
+          color: BLACK,
         },
       },
     },
@@ -177,6 +167,13 @@ const theme = createTheme({
           "@media (min-width: 1200px)": {
             maxWidth: 1200,
           },
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
         },
       },
     },
